@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/expman.jpg') no-repeat center center/cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #ddd;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .showcase .showcase-content{
+            max-width: 850px;
+            margin-top: 15%;
+            padding: 0 95px;
+        }
+        .showcase .showcase-content h1{
+            color: #55BA53;
+            font-size: 60px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .showcase .showcase-content span{
+            color: #fff;
+            font-family: 'Verdana', sans-serif;
+            font-weight: 500;
+        }
+        .showcase .showcase-content p{
+            color: #ceced4;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .showcase .showcase-content .btn-left{
+            background: linear-gradient(to right, #0a3609 , #55BA53);
+        }
+        .showcase .showcase-content .btn-right{
+            background: linear-gradient(to right,#55BA53, #0a3609);
+        }
+        .showcase{
+            
+            width: 100%;
+            height: 100vh;        }
+        
+    
+        
+    </style>
+</head>
+<body>
+    <div class="showcase">
+        <div class="showcase-content">
+            <h1>Manage your all expenses<br> with our <span>Expenditure Manager</span></h1>
+            <p>Here you can add all your expenses with price, time and date. <br>Add up your expenses to the list and manage your expenses accordingly.<br>More features will be available in the future.</p>
+        </div>
+</div>
+<div class="container">
+    <h1>Expenditure Manager List </h1>
+    <input type="text" id="inputData" placeholder="Enter expense name">
+    <input type="number" id="numData" placeholder="Enter Amount">
+    <input type="time" id="timeData" placeholder="Enter time">
+    <input type="date" id="dateData" placeholder="Enter date">
+    <input type="file" id="fileData" placeholder="Insert file if needed">
+    <button onclick="addItem()">Add to List</button>
+    <ul id="dataList"></ul>
+
+    
+
+    
+
+    <script>
+        function addItem() {
+            var inputElement = document.getElementById('inputData');
+            var dataListElement = document.getElementById('dataList');
+           
+
+            if (inputElement.value.trim() !== '') {
+                var li = document.createElement('li');
+                li.textContent = inputElement.value;
+                
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function() {
+                    dataListElement.removeChild(li);
+                };
+                deleteButton.style.width="60px"
+
+                li.appendChild(deleteButton);
+                dataListElement.appendChild(li);
+
+                // Clear the input field after adding an item
+                inputElement.value = '';
+            }
+        }
+    </script>
+
+
+
+
+
+    
+</div>
+</body>
+</html>

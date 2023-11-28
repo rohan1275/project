@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgeting App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/bud2.jpg') no-repeat center center/cover;
+ 
+        }
+
+        #budget-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        #expenses-list {
+            margin-top: 20px;
+        }
+        h2{
+            color:#4CAF50;
+            text-align: center;
+        }
+        p{
+            color: #0A2940;
+            text-align: center;
+        }
+        div{
+        padding: 10px;
+        margin: 10px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 5px 5px 20px rgba(0,0,0,0.3), -5px -5px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.5s ease;
+        text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="budget-form">
+    <h2>Budgeting Manager</h2>
+    <p>This can definetly help you in budgeting your expenses.</p>
+    <label for="income">Income:</label>
+    <input type="number" id="income" placeholder="Enter your income" required>
+
+    <label for="fixed-expenses">Fixed Expenses:</label>
+    <input type="number" id="fixed-expenses" placeholder="Enter your fixed expenses" required>
+
+    <label for="variable-expenses">Variable Expenses:</label>
+    <input type="number" id="variable-expenses" placeholder="Enter your variable expenses" required>
+
+    <button onclick="calculateBudget()">Calculate Budget</button>
+
+    <div id="result"></div>
+
+    <div id="expenses-list">
+        <h3>Expense Breakdown</h3>
+        <ul id="expenses-ul"></ul>
+    </div>
+</div>
+
+<script>
+    function calculateBudget() {
+        var income = parseFloat(document.getElementById('income').value);
+        var fixedExpenses = parseFloat(document.getElementById('fixed-expenses').value);
+        var variableExpenses = parseFloat(document.getElementById('variable-expenses').value);
+
+        if (isNaN(income) || isNaN(fixedExpenses) || isNaN(variableExpenses)) {
+            alert('Please enter valid numbers for income and expenses.');
+            return;
+        }
+
+        var totalExpenses = fixedExpenses + variableExpenses;
+        var remainingBudget = income - totalExpenses;
+
+        var resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '<h3>Budget Result</h3>' +
+            '<p>Income: $' + income.toFixed(2) + '</p>' +
+            '<p>Total Expenses: $' + totalExpenses.toFixed(2) + '</p>' +
+            '<p>Remaining Budget: $' + remainingBudget.toFixed(2) + '</p>';
+
+        displayExpenseBreakdown();
+    }
+
+    function displayExpenseBreakdown() {
+        var fixedExpenses = parseFloat(document.getElementById('fixed-expenses').value);
+        var variableExpenses = parseFloat(document.getElementById('variable-expenses').value);
+
+        var expensesList = document.getElementById('expenses-ul');
+        expensesList.innerHTML = '';
+
+        if (!isNaN(fixedExpenses)) {
+            expensesList.innerHTML += '<li>Fixed Expenses: $' + fixedExpenses.toFixed(2) + '</li>';
+        }
+
+        if (!isNaN(variableExpenses)) {
+            expensesList.innerHTML += '<li>Variable Expenses: $' + variableExpenses.toFixed(2) + '</li>';
+        }
+    }
+</script>
+
+</body>
+</html>
